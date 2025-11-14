@@ -1,0 +1,33 @@
+spring:
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+      properties:
+        spring.json.type.mapping: orderConfirmation:com.yasser.ecommerce.kafka.OrderConfirmation
+  datasource:
+    url: jdbc:postgresql://localhost:5432/orderservice
+    username: postgres
+    password: password123
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  application:
+    name: order-service
+
+server:
+  port: 8093
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/
+
+customer-url: http://CUSTOMER-SERVICE/api/v1/customer
+product-url: http://PRODUCT-SERVICE/api/v1/products
+payment-url: http://PAYMENT-SERVICE/api/v1/payment
